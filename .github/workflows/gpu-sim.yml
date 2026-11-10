@@ -62,7 +62,7 @@ jobs:
           git -C "${RUNNER_TEMP}/neonufft" log -1 --format='neonufft %H'
           cmake -S "${RUNNER_TEMP}/neonufft" -B "${RUNNER_TEMP}/neonufft-build" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_CXX_COMPILER=/opt/rocm/bin/amdclang++ \
+            -DCMAKE_CXX_COMPILER=/opt/rocm/lib/llvm/bin/clang++ \
             -DCMAKE_CXX_FLAGS="-march=native" \
             -DNEONUFFT_THREADING=NATIVE -DNEONUFFT_MULTI_ARCH=OFF \
             -DNEONUFFT_GPU=ROCM -DCMAKE_HIP_ARCHITECTURES=gfx942 \
@@ -76,7 +76,7 @@ jobs:
         run: |
           cmake -S . -B build \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_CXX_COMPILER=/opt/rocm/bin/amdclang++ \
+            -DCMAKE_CXX_COMPILER=/opt/rocm/lib/llvm/bin/clang++ \
             -DBIPP_BUILD_TESTS=ON -DBIPP_GPU=ROCM -DBIPP_PYTHON=OFF -DBIPP_MPI=OFF \
             -DCMAKE_HIP_ARCHITECTURES=gfx942 \
             -DCMAKE_PREFIX_PATH="/opt/rocm;${RUNNER_TEMP}/neonufft-install"
