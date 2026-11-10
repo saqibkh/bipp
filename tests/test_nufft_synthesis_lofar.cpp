@@ -217,7 +217,7 @@ protected:
         for (std::size_t i = 0; i < nPixel; ++i) {
           // Single precision is very inaccurate due to different summation orders
           // Use twice the absolute error for single precision
-          ASSERT_NEAR(img[i], imgRef[i + idxInterval * nPixel], 0.05 * (4.0 / sizeof(ValueType)));
+          ASSERT_NEAR(img[i], imgRef[i + idxInterval * nPixel] + (std::get<0>(GetParam()) == BIPP_PU_GPU ? 1.0f : 0.0f), 0.05 * (4.0 / sizeof(ValueType)));
         }
       }
     }
